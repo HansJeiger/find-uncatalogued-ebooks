@@ -23,15 +23,28 @@ const writeFile = (values) => {
     name: "MyTable",
     ref: "A1",
     headerRow: true,
-    columns: [{ name: "1" }, { name: "2" }, { name: "3" }],
+    columns: [{ name: "ISBN" }, { name: "Tittel" }, { name: "Forlag" }],
     rows: values.map((value) => [value, value, value]),
   });
   workbook.xlsx.writeFile("isbn.xlsx");
 };
 
-const isbns = readFile()
+const getIsbnQuery = (isbns) => {
+  return `SELECT i.Varenr AS ISBN, i.Title AS Tittel, s.Text AS Forlag
+  FROM Item i
+  JOIN ItemField f ON i.Item_ID = f.Item_ID AND f.FieldCode = '260'
+  JOIN ItemSubField s ON f.ItemField_ID = s.ItemField_ID AND s.SubFieldCode = 'b'
+  WHERE i.Varenr IN (${isbns.reduce(
+    (acc, isbn, index) => `${acc}${index === 0 ? "" : ","}'${isbn}'`,
+    ""
+  )})
+  AND i.Currentstatus = '0'`;
+};
+
+readFile()
   .then((values) => {
-    console.log(values);
+    const query = getIsbnQuery(values);
+    console.log(query);
     writeFile(values);
   })
   .catch((error) => {
