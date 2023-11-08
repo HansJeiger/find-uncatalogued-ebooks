@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    // We target the latest LTS version of NodeJS.
+    // At the time of writing, Node 18 supports most of ES2022.
+    // Ref: https://node.green/
+    "target": "ES2022",
+
+    // This project used ESM for a while, but there were too many issues
+    // with NPM dependencies, so we switched back to CommonJS for now.
+    // Ref: https://github.com/biblioteksentralen/dataplattform/pull/395
+    "module": "CommonJS",
+
+    // Fixes some issues with how TypeScript imports CommonJS modules
+    "esModuleInterop": true,
+
+    // Stricter type checking
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    // Create declaration files (.d.ts) for the compiled JS files.
+    "declaration": true,
+
+    // Declaration maps lets VSCode jump to the original source code
+    // when looking up the definition of an imported symbol.
+    "declarationMap": true,
+
+    // Source maps lets NodeJS point to the original source code (instead
+    // of compiled JS code) in stack traces.
+    "sourceMap": true
+  },
+  "ts-node": {
+    // Needed to support .js extensions in imports. We generally try to adhere to
+    // using .js extensions in imports to ease the migration to ESM later.
+    "experimentalResolver": true
+  }
+}
