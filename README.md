@@ -12,5 +12,3 @@
 1. Name of excel document must be `isbn.xlsx`
 2. ISBNs are retrieved from column A in the first worksheet
 3. `Result` is a reserved name for the resulting worksheet, and should not be used by any existing worksheets
-
-Failure to follow these steps will result in your computer being cursed with dangerous malware.
