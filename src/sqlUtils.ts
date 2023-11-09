@@ -45,12 +45,15 @@ export const getIsbnQuery = (isbns: string[]) => {
 };
 
 export const queryPromus = async (query: string) => {
+  console.log("Sending query to Promus");
   try {
     // make sure that any items are correctly URL encoded in the connection string
     await sql.connect(
       sqlConfig //"Server=wg-sxd0e-010.i04.local,1435;Database=promus;User Id=promus_readonly;Password=zn71!xBJ!!n2;Encrypt=true;TrustServerCertificate=true"
     );
     const result = await sql.query(query);
+    console.log("Retrieved result from Promus");
+
     return result;
   } catch (err) {
     console.error(err);

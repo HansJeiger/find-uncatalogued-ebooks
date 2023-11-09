@@ -11,7 +11,10 @@ readFile()
       throw new Error("Result from Promus is undefined");
     return writeFile(result);
   })
-  .then(() => process.exit(0))
+  .then(() => {
+    console.log('Results are now available in worksheet "Result" in isbn.xlsx');
+    process.exit(0);
+  })
   .catch((error) => {
     console.warn(error);
   });
