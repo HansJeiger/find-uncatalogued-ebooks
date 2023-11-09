@@ -1,6 +1,8 @@
 import { getIsbnQuery, queryPromus } from "./sqlUtils";
 import { readFile, writeFile } from "./excelUtils";
 
+console.log("Starting script");
+
 readFile()
   .then((values) => {
     const query = getIsbnQuery(values);
@@ -12,7 +14,7 @@ readFile()
     return writeFile(result);
   })
   .then(() => {
-    console.log('Results are now available in worksheet "Result" in isbn.xlsx');
+    console.log('Results are now available in worksheet "Result" in \"isbn.xlsx\"');
     process.exit(0);
   })
   .catch((error) => {

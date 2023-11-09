@@ -4,7 +4,7 @@ import { IResult } from "mssql";
 const workbook = new ExcelJS.Workbook();
 
 export const readFile = async () => {
-  console.log("Reading isbn.xlsx");
+  console.log('Reading "isbn.xlsx"');
   await workbook.xlsx.readFile("isbn.xlsx");
   const column = workbook.getWorksheet(1)?.getColumn(1);
   if (!column) throw new Error("Could not retrieve column from worksheet.");
@@ -20,7 +20,7 @@ export const readFile = async () => {
 };
 
 export const writeFile = async (result: IResult<any>) => {
-  console.log('Writing results to worksheet "Result" in isbn.xlsx');
+  console.log('Writing results to worksheet "Result" in "isbn.xlsx"');
   workbook.removeWorksheet("Result");
   const newSheet = workbook.addWorksheet("Result", {
     properties: { defaultColWidth: 20 },
