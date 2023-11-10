@@ -5,9 +5,18 @@ const workbook = new ExcelJS.Workbook();
 
 export const readFile = async () => {
   console.log('Reading "isbn.xlsx"');
-  await workbook.xlsx.readFile("isbn.xlsx");
+  try {
+    await workbook.xlsx.readFile("isbn.xlsx");
+  } catch (err) {
+    throw new Error(
+      "Could not read isbn.xlsx. Make sure the file is placed in the root directory of this project."
+    );
+  }
   const column = workbook.getWorksheet(1)?.getColumn(1);
-  if (!column) throw new Error("Could not retrieve column from worksheet.");
+  if (!column)
+    throw new Error(
+      "Could not retrieve column from worksheet. Make sure ISBNs exist in column A in the first worksheet in isbn.xlsx"
+    );
   const isbns: string[] = [];
   column?.eachCell((cell) => {
     const value = cell.value;

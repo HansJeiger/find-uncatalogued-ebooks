@@ -6,6 +6,11 @@ console.log("Starting script");
 readFile()
   .then((values) => {
     const query = getIsbnQuery(values);
+    console.log(`Querying database for ${values.length} ISBNs:`, values);
+    if (values.length === 0)
+      throw new Error(
+        "No ISBNs found in isbn.xlsx. Are the ISBNs contained in column A of the first worksheet?"
+      );
     return queryPromus(query);
   })
   .then((result) => {
@@ -14,7 +19,9 @@ readFile()
     return writeFile(result);
   })
   .then(() => {
-    console.log('Results are now available in worksheet "Result" in \"isbn.xlsx\"');
+    console.log(
+      'Results are now available in worksheet "Result" in "isbn.xlsx"'
+    );
     process.exit(0);
   })
   .catch((error) => {

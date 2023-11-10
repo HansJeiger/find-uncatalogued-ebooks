@@ -57,6 +57,8 @@ export const queryPromus = async (query: string) => {
     return result;
   } catch (err) {
     console.error(err);
-    // ... error checks
+    throw new Error(
+      "Cannot connect to Promus database, make sure you are connected to the WG-XWLAN network either directly or through VPN and that variables in .env are correct"
+    );
   }
 };
