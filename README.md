@@ -3,7 +3,7 @@
 1. Install [node.js](https://nodejs.org/en/download) if you have not already
 2. Clone this project
 3. In the project directory, run the file named `setup.cmd` which installs node packages and creates a `.env` file
-4. In the `.env` file, fill in the required values. You can get hem from someone with access to Doppler
+4. In the `.env` file, fill in the required values. You can get them from someone with access to Doppler
 
 ## How to use
 6. Make sure excel document is in correct format (see below)
